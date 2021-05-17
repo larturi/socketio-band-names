@@ -14,48 +14,18 @@
 
 <body class="container">
 
-    <h1 class="mt-5">MiniChat</h1>
+    <h1 class="mt-5">Acceso Denegado</h1>
     <hr>
-
-    <form id="miFormulario">
-        <div class="row">
-            <div class="col-8">
-                <input type="text" id="txtMensaje" placeholder="Mensaje" class="form-control">
-            </div>
-            <div class="col-4">
-                <button class="btn btn-primary" type="submit">Enviar</button>
-            </div>
-        </div>
-    </form>
-
-    <div class="row">
-        <div class="col mt-3">
-            <ul id="misMensajes"></ul>
-        </div>
-    </div>
 
     <script>
 
         // Socket del Cliente
         const socket = io('http://localhost:3001/');
 
-        // Referencias a elementos del DOM
-        const formulario = document.querySelector('#miFormulario');
-        const mensajes = document.querySelector('#misMensajes');
-        const txtMensaje = document.querySelector('#txtMensaje');
-       
-        formulario.addEventListener('submit', (ev) => {
-            ev.preventDefault();
-
-            const nuevoMensaje = txtMensaje.value;
-            socket.emit('mensaje-to-server', {
-                msg: nuevoMensaje
-            });
+        socket.on('current-bands', ( bands ) => {
+            console.log(bands);
         });
 
-        socket.on('mensaje-from-server', (data) => {
-            mensajes.innerHTML += `<li>${ data.msg }</li>`;
-        });
 
     </script>
 
